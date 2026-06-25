@@ -304,6 +304,17 @@
     });
   }
 
+  // duplicate each testimonials column so the vertical marquee loops seamlessly
+  function initReviewsWall() {
+    if (reduceMotion) return;                       // static; CSS shows one set
+    doc.querySelectorAll('.tCol > .tColInner').forEach(inner => {
+      const clone = inner.cloneNode(true);
+      clone.classList.add('tclone');
+      clone.setAttribute('aria-hidden', 'true');
+      inner.parentElement.appendChild(clone);
+    });
+  }
+
   /* ===============================================================
      BOOT
      =============================================================== */
@@ -314,6 +325,7 @@
     initCounters();
     initReviews();
     initReviewFab();
+    initReviewsWall();
     initSmooth();
     initPreloader(() => initMotion());
   }
