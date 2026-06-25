@@ -197,11 +197,11 @@
     // generic reveals (everything outside the hero)
     gsap.utils.toArray('[data-reveal]').forEach(el => {
       if (el.closest('.hero')) return;
-      const st = { trigger: el, start: 'top 85%' };
+      const st = { trigger: el, start: 'top 92%' };
       if (el.dataset.reveal === 'mask') {
-        gsap.to(el, { clipPath: 'inset(0 -.14em -.14em -.14em)', duration: 1.05, ease: 'power3.out', scrollTrigger: st });
+        gsap.to(el, { clipPath: 'inset(0 -.14em -.14em -.14em)', duration: .55, ease: 'power2.out', scrollTrigger: st });
       } else {
-        gsap.to(el, { opacity: 1, y: 0, duration: .9, ease: 'power3.out', scrollTrigger: st });
+        gsap.to(el, { opacity: 1, y: 0, duration: .6, ease: 'power2.out', scrollTrigger: st });
       }
     });
     gsap.utils.toArray('[data-reveal-stagger]').forEach(g => {
