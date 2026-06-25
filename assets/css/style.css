@@ -143,6 +143,7 @@ body.menu-open .mobile-menu a:nth-child(2){transition-delay:.14s}
 body.menu-open .mobile-menu a:nth-child(3){transition-delay:.20s}
 body.menu-open .mobile-menu a:nth-child(4){transition-delay:.26s}
 body.menu-open .mobile-menu a:nth-child(5){transition-delay:.32s}
+body.menu-open .mobile-menu a:nth-child(6){transition-delay:.38s}
 
 /* ====================================================================
    BUTTONS
@@ -342,6 +343,51 @@ footer{position:relative;z-index:1;padding:clamp(48px,6vw,72px) 0 38px;border-to
   opacity:0;visibility:hidden;transform:translateY(12px);transition:.4s var(--ease)}
 .totop.show{opacity:1;visibility:visible;transform:none}
 .totop:hover{border-color:var(--v3);color:var(--v4)}
+
+/* ====================================================================
+   REVIEWS (Google rating)
+   ==================================================================== */
+#reviews .sec-head{margin-inline:auto;text-align:center}
+#reviews .kicker{justify-content:center}
+#reviews .sub{margin-inline:auto}
+.review-card{max-width:560px;margin:0 auto;padding:clamp(28px,4vw,44px) clamp(22px,3vw,40px);
+  text-align:center;position:relative;overflow:hidden;
+  background:var(--glass-2);border:1px solid var(--line-2);backdrop-filter:blur(8px);
+  box-shadow:0 40px 100px -50px rgba(80,40,200,.6), inset 0 1px 0 rgba(255,255,255,.05)}
+.review-card::before{content:'';position:absolute;top:0;inset-inline:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--v4),transparent)}
+.review-head{display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.4rem;
+  font-weight:600;font-size:1rem;color:var(--text-soft)}
+.g-logo{width:24px;height:24px;flex-shrink:0}
+.stars{display:flex;direction:ltr;justify-content:center;gap:clamp(.3rem,1.4vw,.7rem);margin-bottom:1.1rem}
+.star{appearance:none;background:none;border:none;padding:.1rem;cursor:pointer;line-height:1;
+  transition:transform .25s var(--ease)}
+.star::before{content:'★';display:block;font-size:clamp(2.1rem,7vw,2.9rem);color:rgba(255,255,255,.16);
+  transition:color .2s,text-shadow .2s,transform .2s}
+.star:hover{transform:scale(1.16) translateY(-2px)}
+.star.hot::before{color:#ffce4a;text-shadow:0 0 16px rgba(255,190,70,.6)}
+.star.on::before{color:#ffc83d;text-shadow:0 0 18px rgba(255,180,55,.7)}
+.stars-hint{min-height:1.4em;color:var(--text-mute);font-size:.95rem;font-weight:500;margin-bottom:1.6rem;
+  transition:color .3s}
+.stars-hint.thanks{color:var(--v4)}
+.review-go{width:100%;max-width:340px}
+
+/* floating "rate us" bubble */
+.review-fab{position:fixed;bottom:24px;inset-inline-start:24px;z-index:700;
+  height:56px;width:56px;padding-inline:15px;border:none;cursor:pointer;border-radius:50px;
+  display:flex;align-items:center;gap:.55rem;overflow:hidden;white-space:nowrap;
+  background:linear-gradient(135deg,var(--v2),var(--v3));color:#fff;
+  box-shadow:0 14px 34px -10px rgba(124,92,224,.75);
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.92);
+  transition:width .42s var(--ease),opacity .42s var(--ease),transform .42s var(--ease),box-shadow .3s}
+.review-fab.show{opacity:1;visibility:visible;transform:none;animation:fabGlow 3.2s ease-in-out infinite}
+.review-fab:hover{width:182px;box-shadow:0 20px 44px -10px rgba(124,92,224,1)}
+.review-fab-star{width:26px;height:26px;flex-shrink:0;fill:#ffd24a;filter:drop-shadow(0 0 6px rgba(255,200,70,.75))}
+.review-fab-label{font-weight:700;font-size:.96rem;opacity:0;transform:translateX(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.review-fab:hover .review-fab-label{opacity:1;transform:none}
+@keyframes fabGlow{0%,100%{box-shadow:0 14px 34px -10px rgba(124,92,224,.7)}50%{box-shadow:0 16px 42px -8px rgba(139,92,246,1)}}
+@media (hover:none){.review-fab{width:56px!important}.review-fab-label{display:none}}
 
 /* ====================================================================
    REVEAL STATES (JS animates; .no-js shows everything)

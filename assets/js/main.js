@@ -260,6 +260,51 @@
   }
 
   /* ===============================================================
+     8. GOOGLE REVIEWS — star widget + floating bubble
+     =============================================================== */
+  const GOOGLE_REVIEW_URL = 'https://g.page/r/CU87GRVEWCRuEBM/review';
+
+  function initReviews() {
+    const wrap = doc.getElementById('stars');
+    const hint = doc.getElementById('starsHint');
+    if (!wrap) return;
+    const stars = [...wrap.querySelectorAll('.star')];
+    const paint = (n, cls) => stars.forEach((s, i) => s.classList.toggle(cls, i < n));
+    let opening = false;
+    stars.forEach((s, idx) => {
+      const v = idx + 1;
+      s.addEventListener('mouseenter', () => paint(v, 'hot'));
+      s.addEventListener('focus', () => paint(v, 'hot'));
+      s.addEventListener('click', () => {
+        if (opening) return;
+        opening = true;
+        stars.forEach((x, i) => x.classList.toggle('on', i < v));
+        paint(0, 'hot');
+        if (hint) { hint.textContent = 'תודה על הדירוג! מעבירים אתכם ל-Google…'; hint.classList.add('thanks'); }
+        setTimeout(() => { window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener'); opening = false; }, 650);
+      });
+    });
+    wrap.addEventListener('mouseleave', () => paint(0, 'hot'));
+  }
+
+  function initReviewFab() {
+    const fab = doc.getElementById('reviewFab');
+    const target = doc.getElementById('reviews');
+    if (!fab || !target) return;
+    let inView = false;
+    const update = () => fab.classList.toggle('show', window.scrollY > innerHeight * 0.55 && !inView);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => { es.forEach(e => { inView = e.isIntersecting; }); update(); }, { threshold: .2 }).observe(target);
+    }
+    addEventListener('scroll', update, { passive: true });
+    update();
+    fab.addEventListener('click', () => {
+      if (window.lenis) window.lenis.scrollTo(target, { offset: -64, duration: 1.1 });
+      else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
+  /* ===============================================================
      BOOT
      =============================================================== */
   function boot() {
@@ -267,6 +312,8 @@
     initCursor();
     initNav();
     initCounters();
+    initReviews();
+    initReviewFab();
     initSmooth();
     initPreloader(() => initMotion());
   }
