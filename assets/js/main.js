@@ -1,5 +1,5 @@
-﻿/* ==========================================================================
-   JOB POWER HR ג€” v2 interactions & motion
+/* ==========================================================================
+   JOB POWER HR — v2 interactions & motion
    ========================================================================== */
 (() => {
   'use strict';
@@ -179,7 +179,7 @@
       const txt = brand.textContent; brand.innerHTML = '';
       [...txt].forEach(ch => {
         const s = doc.createElement('span'); s.className = 'char';
-        s.textContent = ch === ' ' ? 'ֲ ' : ch; brand.appendChild(s);
+        s.textContent = ch === ' ' ? ' ' : ch; brand.appendChild(s);
       });
       gsap.set('.hero-brand .char', { yPercent: 120, opacity: 0 });
     }
@@ -260,7 +260,7 @@
   }
 
   /* ===============================================================
-     8. GOOGLE REVIEWS ג€” star widget + floating bubble
+     8. GOOGLE REVIEWS — star widget + floating bubble
      =============================================================== */
   const GOOGLE_REVIEW_URL = 'https://g.page/r/CU87GRVEWCRuEBM/review';
 
@@ -280,7 +280,7 @@
         opening = true;
         stars.forEach((x, i) => x.classList.toggle('on', i < v));
         paint(0, 'hot');
-        if (hint) { hint.textContent = '׳×׳•׳“׳” ׳¢׳ ׳”׳“׳™׳¨׳•׳’! ׳׳¢׳‘׳™׳¨׳™׳ ׳׳×׳›׳ ׳-Googleג€¦'; hint.classList.add('thanks'); }
+        if (hint) { hint.textContent = 'תודה על הדירוג! מעבירים אתכם ל-Google…'; hint.classList.add('thanks'); }
         setTimeout(() => { window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener'); opening = false; }, 650);
       });
     });
